@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./output.css" rel="stylesheet" />
+  </head>
+  <body class="bg-[#7F8C8D] flex h-screen justify-center items-center">
+    <div
+      id="matchStartSection"
+      class="bg-[#BDC3C7] w-[600px] h-[500px] hidden grid-cols-12 grid-rows-12 gap-2 rounded-xl p-5"
+    >
+      <div
+        id="playerOneNameBox"
+        class="text-center col-span-6 row-span-2 flex items-center justify-center text-3xl font-bold"
+      >
+        Player 1
+      </div>
+      <div
+        id="playerTwoNameBox"
+        class="text-center col-span-6 row-span-2 flex items-center justify-center"
+      >
+        Player 2
+      </div>
+      <div
+        id="playerOneSetsBox"
+        class="border text-center col-span-3 row-span-1 flex items-center justify-center"
+      >
+        Set:
+      </div>
+      <div
+        id="playerOneLegsBox"
+        class="border text-center col-span-3 row-span-1 flex items-center justify-center"
+      >
+        Legs:
+      </div>
+      <div
+        id="playerTwoSetsBox"
+        class="border text-center col-span-3 row-span-1 flex items-center justify-center"
+      >
+        Set:
+      </div>
+      <div
+        id="playerTwoLegsBox"
+        class="border text-center col-span-3 row-span-1 flex items-center justify-center"
+      >
+        Legs:
+      </div>
+      <div
+        id="playerOneRemainBox"
+        class="border text-center col-span-6 row-span-5 flex items-center justify-center text-6xl"
+      ></div>
+      <div
+        id="playerTwoRemainBox"
+        class="border text-center col-span-6 row-span-5 flex items-center justify-center text-6xl"
+      ></div>
+      <div
+        id="playerOneCheckoutBox"
+        class="border text-center col-span-4 row-span-2 flex items-center justify-center"
+      ></div>
+      <div
+        id="playerOneScoreBox"
+        class="border text-center col-span-2 row-span-2 flex items-center justify-center"
+      ></div>
+      <div
+        id="playerTwoScoreBox"
+        class="border text-center col-span-2 row-span-2 flex items-center justify-center"
+      ></div>
+      <div
+        id="playerTwoCheckoutBox"
+        class="border text-center col-span-4 row-span-2 flex items-center justify-center"
+      ></div>
+      <div
+        id="playerOneAvgBox"
+        class="border col-span-3 row-span-1 flex items-center justify-center"
+      ></div>
+      <div
+        id="playerOneDartsBox"
+        class="border col-span-3 row-span-1 flex items-center justify-center"
+      >
+        Darts: 0
+      </div>
+      <div
+        id="playerTwoAvgBox"
+        class="border col-span-3 row-span-1 flex items-center justify-center"
+      ></div>
+      <div
+        id="playerTwoDartsBox"
+        class="border col-span-3 row-span-1 flex items-center justify-center border-"
+      >
+        Darts: 0
+      </div>
+      <div
+        class="text-center col-span-6 row-span-2 flex items-center justify-around"
+      >
+        <label class="px-4" for="matchInput">Enter score:</label>
+        <input
+          class="bg-white text-center w-24 text-xl rounded-lg"
+          type="number"
+          name="matchInput"
+          id="matchInput"
+        />
+      </div>
+      <div
+        class="text-center col-span-6 row-span-2 flex items-center justify-center"
+      >
+        <button
+          id="matchReturnBtn"
+          type="button"
+          class="returnGameBtn text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-lg uppercase p-1 w-44"
+          onClick="window.location.reload();"
+        >
+          Exit match
+        </button>
+      </div>
+    </div>
+    <!-- sekcja statystyk meczowych -->
+    <div
+      id="statsSection"
+      class="bg-[#BDC3C7] w-[600px] h-[500px] hidden justify-evenly items-center flex-col rounded-xl p-5"
+    >
+      <h1 class="text-6xl font-bold uppercase">Game stats</h1>
+      <div class="flex flex-row justify-evenly w-[600px]">
+        <div id="playerOneStats" class="text-center">
+          <p class="pOneName">name</p>
+          <p class="pOneSets">setsWon</p>
+          <p class="pOneLegs">legsWon</p>
+          <p class="pOneAvg">average</p>
+          <p class="pOneBL">bestLeg</p>
+          <p class="pOneHF">highestFinish</p>
+          <p class="pOne100">tonplus</p>
+          <p class="pOne130">ton30plus</p>
+          <p class="pOne170">ton70plus</p>
+          <p class="pOne180">ton80</p>
+        </div>
+        <div class="flex flex-col text-center">
+          <p class="px-2 font-bold">Name</p>
+          <p class="font-bold">Sets</p>
+          <p class="font-bold">Legs</p>
+          <p class="font-bold">Average</p>
+          <p class="font-bold">Best Leg</p>
+          <p class="font-bold">Highest Finish</p>
+          <p class="font-bold">100+</p>
+          <p class="font-bold">130+</p>
+          <p class="font-bold">170+</p>
+          <p class="font-bold">180+</p>
+        </div>
+        <div id="playerTwoStats" class="text-center">
+          <p class="pTwoName">name</p>
+          <p class="pTwoSets">setsWon</p>
+          <p class="pTwoLegs">legsWon</p>
+          <p class="pTwoAvg">average</p>
+          <p class="pTwoBL">bestLeg</p>
+          <p class="pTwoHF">highestFinish</p>
+          <p class="pTwo100">tonplus</p>
+          <p class="pTwo130">ton30plus</p>
+          <p class="pTwo170">ton70plus</p>
+          <p class="pTwo180">ton80</p>
+        </div>
+      </div>
+      <button
+        id="statsReturnBtn"
+        type="button"
+        class="returnGameBtn text-white bg-[#002B5B] hover:bg-[#235792] font-medium rounded-lg text-lg uppercase p-1 w-44"
+        onClick="window.location.reload();"
+      >
+        close
+      </button>
+    </div>
+    <!-- sekcja Around the world -->
+    <div
+      id="atwStartSection"
+      class="bg-[#BDC3C7] w-[600px] h-5/6 hidden rounded-xl p-5"
+    >
+      ATW
+      <button
+        id="atwReturnBtn"
+        type="button"
+        class="returnGameBtn text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-lg uppercase p-1 w-44"
+      >
+        return
+      </button>
+    </div>
+    <!-- sekcja Bobs 27 -->
+    <div
+      id="bobsStartSection"
+      class="bg-[#BDC3C7] w-[600px] h-[500px] hidden grid-cols-12 grid-rows-auto gap-2 rounded-xl p-5"
+    >
+      <div
+        id=""
+        class="border text-center col-span-full row-span-1 flex items-center justify-center text-3xl font-bold"
+      >
+        <h1 class="text-2xl">Bob's 27</h1>
+      </div>
+      <div
+        id="bobsTarget"
+        class="border text-center col-span-full row-span-2 flex items-center justify-center text-3xl font-bold"
+      >
+        Target:
+      </div>
+      <div
+        id=""
+        class="border text-center col-span-full row-span-5 flex items-center justify-around font-bold w-full"
+      >
+        <div id="bobsPercent" class="w-[100px]">20%</div>
+        <div id="bobsScore" class="text-5xl">Score</div>
+        <div id="bobsHits" class="w-[100px]">0/3</div>
+      </div>
+
+      <div
+        class="text-center col-span-6 row-span-2 flex items-center justify-around"
+      >
+        <label class="px-4" for="bobsInput">Target hits:</label>
+        <input
+          class="bg-white text-center w-24 text-xl rounded-lg"
+          type="number"
+          name="bobsInput"
+          id="bobsInput"
+        />
+      </div>
+      <div
+        class="text-center col-span-6 row-span-2 flex items-center justify-around"
+      >
+        <button
+          id="bobsReturnBtn"
+          type="button"
+          class="returnGameBtn text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-lg uppercase p-1 w-44"
+        >
+          return
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="mainMenuSection"
+      class="bg-[#BDC3C7] w-[800px] h-[500px] flex justify-center items-center rounded-lg"
+    >
+      <div class="h-4/5 w-1/2 px-6 flex flex-col justify-around items-center">
+        <h1 class="mb-3 text-4xl font-bold uppercase">GAMES</h1>
+        <button
+          id="matchBtn"
+          type="button"
+          class="text-white bg-[#002B5B] hover:bg-[#235792] font-medium rounded-lg text-xl uppercase p-3 w-[70%]"
+        >
+          X01 Double Out
+        </button>
+        <button
+          id="atwBtn"
+          type="button"
+          class="text-white bg-[#002B5B] hover:bg-[#235792] font-medium rounded-lg text-xl uppercase p-3 w-[70%]"
+        >
+          Around the world
+        </button>
+        <button
+          id="bobsBtn"
+          type="button"
+          class="text-white bg-[#002B5B] hover:bg-[#235792] font-medium rounded-lg text-xl uppercase p-3 w-[70%]"
+        >
+          Bob's 27
+        </button>
+      </div>
+      <div class="h-4/5 w-1/2 px-6 flex flex-col justify-around items-center">
+        <!-- X01 DOUBLE OUT -->
+        <div
+          id="matchSection"
+          class="gameSection flex flex-col justify-around items-center"
+        >
+          <h1 class="text-4xl uppercase font-bold text-center mb-4">
+            X01 DOUBLE OUT
+          </h1>
+          <div class="flex">
+            <div class="m-2">
+              <input
+                id="p1NameInput"
+                class="bg-white w-36 p-2 rounded-lg"
+                name=""
+                type="text"
+                placeholder="Player 1"
+                value="Player 1"
+              />
+            </div>
+            <div class="m-2">
+              <input
+                id="p2NameInput"
+                class="bg-white w-36 p-2 rounded-lg"
+                name=""
+                type="text"
+                placeholder="Player 2"
+                value="Player 2"
+              />
+            </div>
+          </div>
+          <div class="flex justify-between items-center w-3/4 mb-2">
+            <label class="text-2xl" for="mode">Distance</label>
+            <select
+              class="bg-white w-16 h-8 text-center rounded-lg"
+              name="mode"
+              id="distance"
+            >
+              <option value="170">170</option>
+              <option value="301">301</option>
+              <option value="501">501</option>
+              <option value="701">701</option>
+            </select>
+          </div>
+          <div class="flex justify-between items-center w-3/4 mb-2">
+            <label class="text-2xl" for="sets">First to sets</label>
+            <input
+              id="sets"
+              class="bg-white w-16 h-8 text-center rounded-lg"
+              name="sets"
+              type="number"
+              value="1"
+            />
+          </div>
+          <div class="flex justify-between items-center w-3/4 mb-2">
+            <label class="text-2xl" for="legs">First to legs</label>
+            <input
+              id="legs"
+              class="bg-white w-16 h-8 text-center rounded-lg"
+              name="legs"
+              type="number"
+              value="1"
+            />
+          </div>
+
+          <button
+            id="matchStartBtn"
+            type="button"
+            class="text-white bg-[#27AE60] hover:bg-green-700 font-medium rounded-lg text-3xl uppercase p-3 w-44"
+          >
+            Start
+          </button>
+        </div>
+        <!-- AROUND THE WORLD -->
+        <div
+          id="atwSection"
+          class="gameSection hidden flex-col justify-between items-center"
+        >
+          <h1 class="text-4xl uppercase font-bold text-center my-6">
+            AROUND THE WORLD
+          </h1>
+          <div class="text-center mb-2">
+            <p>
+              Score every sector on the board. <br />Scoring: <br />single - 1
+              point <br />double - 2 points <br />triple - 3 points
+            </p>
+          </div>
+          <div class="flex justify-between items-center w-3/4 mb-2">
+            <label class="text-2xl" for="mode">Order</label>
+            <select
+              class="bg-white w-32 h-8 text-center rounded-lg"
+              name="mode"
+              id="atwMode"
+            >
+              <option selected value="Ascending">Ascending</option>
+              <option value="Random">Random</option>
+              <option value="Clockwise">Clockwise</option>
+            </select>
+          </div>
+
+          <button
+            id="atwStartBtn"
+            type="button"
+            class="text-white bg-[#27AE60] hover:bg-green-700 font-medium rounded-lg text-3xl uppercase p-3 w-44"
+          >
+            Start
+          </button>
+        </div>
+        <div
+          id="bobsSection"
+          class="gameSection h-4/5 hidden flex-col justify-between items-center"
+        >
+          <h1 class="text-4xl uppercase font-bold text-center my-6">
+            BOB's 27
+          </h1>
+          <div class="text-center mb-2">
+            <p>
+              Train Your doubles by scoring every double sector one by one
+              starting with D1 ending on Bull.
+            </p>
+          </div>
+          <div class="flex justify-between items-center w-3/4 mb-2">
+            <label class="text-2xl" for="mode">Difficulty</label>
+            <select
+              class="bg-white w-32 h-8 text-center rounded-lg"
+              name="mode"
+              id="atwMode"
+            >
+              <option selected value="Ascending">Easy</option>
+              <option value="Random">Hard</option>
+            </select>
+          </div>
+          <button
+            id="bobsStartBtn"
+            type="button"
+            class="text-white bg-[#27AE60] hover:bg-green-700 font-medium rounded-lg text-3xl uppercase p-3 w-44"
+          >
+            Start
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="module" src="/src/app.js"></script>
+</html>
