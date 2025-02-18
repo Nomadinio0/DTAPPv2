@@ -31,7 +31,7 @@ import {
   matchBtn,
   matchReturnBtn,
   matchStartBtn,
-  statsReturnBtn,
+  matchStatsReturnBtn,
 } from "/src/modules/buttons.js";
 import checkouts from "/src/modules/checkouts.js";
 import {
@@ -51,7 +51,7 @@ function hideSection() {
   visibleSection.classList.add("hidden");
 }
 
-function statsReset(playerOne, playerTwo) {
+function showMatchStats(playerOne, playerTwo) {
   document.querySelector(".pOneName").innerHTML = playerOne.name;
   document.querySelector(".pOneSets").innerHTML = playerOne.setsWon;
   document.querySelector(".pOneLegs").innerHTML = playerOne.legsWon;
@@ -195,7 +195,14 @@ function matchSettingsReset(playerOne, playerTwo, matchSettings) {
   playerTwoAverageBox.innerHTML = `AVG: ${playerTwo.average.toFixed(2)}`;
 }
 
-function bobsInput(target, dartTotal, dartHits, percentage, currentScore) {
+function bobsInput(
+  target,
+  dartTotal,
+  dartHits,
+  percentage,
+  currentScore,
+  difficulty
+) {
   let scoreInput = document.getElementById("bobsInput");
   let round = 0;
 
@@ -222,13 +229,19 @@ function bobsInput(target, dartTotal, dartHits, percentage, currentScore) {
       bobsScore.innerHTML = currentScore;
       bobsPercent.innerHTML = `${percentage.toFixed(2)}%`;
       round++;
-      bobsTarget.innerHTML = doubleTargets[round].description;
+      if (difficulty == "Hard" && currentScore <= 0) {
+        alert("Wynik spadł poniżej 0. Koniec gry!");
+        classToggle(bobsStartSection, "grid");
+        classToggle(mainMenuSection, "flex");
+        return;
+      }
       if (round == 21) {
         alert("Koniec gry!");
         classToggle(bobsStartSection, "grid");
         classToggle(mainMenuSection, "flex");
         return;
       }
+      bobsTarget.innerHTML = doubleTargets[round].description;
     }
   });
 }
@@ -268,7 +281,7 @@ function matchInput(
   function scoreStatsCount(score) {
     if (score == 180) {
       playerTurn().ton80++;
-    } else if (score >= 170 && score != 180) {
+    } else if (score >= 170 && score < 180) {
       playerTurn().ton70plus++;
     } else if (score >= 130 && score < 170) {
       playerTurn().ton30plus++;
@@ -346,7 +359,7 @@ function matchInput(
             playerTwo.legScore = 0;
             if (playerTurn().setsWon == matchSettings.setDistance) {
               // alert(`Wygrywa ${playerOne.name}!`);
-              statsReset(playerOne, playerTwo);
+              showMatchStats(playerOne, playerTwo);
               matchSettingsReset(playerOne, playerTwo, matchSettings);
             }
           }
@@ -449,12 +462,13 @@ function bobsHandle() {
   let dartHits = 0;
   let percentage = 0;
   let currentScore = 27;
+  let difficulty = bobsMode.value;
   bobsHits.innerHTML = `${dartHits} / ${dartTotal}`;
   bobsScore.innerHTML = currentScore;
   bobsPercent.innerHTML = percentage;
   bobsTarget.innerHTML = `Double ${target}`;
 
-  bobsInput(target, dartTotal, dartHits, percentage, currentScore);
+  bobsInput(target, dartTotal, dartHits, percentage, currentScore, difficulty);
 }
 
 matchBtn.addEventListener("click", function () {
@@ -473,7 +487,7 @@ matchReturnBtn.addEventListener("click", function () {
   classToggle(mainMenuSection, "flex");
 });
 
-statsReturnBtn.addEventListener("click", function () {
+matchStatsReturnBtn.addEventListener("click", function () {
   classToggle(statsSection, "flex");
   classToggle(mainMenuSection, "flex");
 });

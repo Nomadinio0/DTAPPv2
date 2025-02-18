@@ -107,10 +107,10 @@
         <button
           id="matchReturnBtn"
           type="button"
-          class="returnGameBtn text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-lg uppercase p-1 w-44"
+          class="text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-lg uppercase p-1 w-44"
           onClick="window.location.reload();"
         >
-          Exit match
+          Exit
         </button>
       </div>
     </div>
@@ -159,9 +159,9 @@
         </div>
       </div>
       <button
-        id="statsReturnBtn"
+        id="matchStatsReturnBtn"
         type="button"
-        class="returnGameBtn text-white bg-[#002B5B] hover:bg-[#235792] font-medium rounded-lg text-lg uppercase p-1 w-44"
+        class="text-white bg-[#002B5B] hover:bg-[#235792] font-medium rounded-lg text-lg uppercase p-1 w-44"
         onClick="window.location.reload();"
       >
         close
@@ -176,9 +176,9 @@
       <button
         id="atwReturnBtn"
         type="button"
-        class="returnGameBtn text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-lg uppercase p-1 w-44"
+        class="text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-lg uppercase p-1 w-44"
       >
-        return
+        exit
       </button>
     </div>
     <!-- sekcja Bobs 27 -->
@@ -224,11 +224,27 @@
         <button
           id="bobsReturnBtn"
           type="button"
-          class="returnGameBtn text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-lg uppercase p-1 w-44"
+          class="text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-lg uppercase p-1 w-44"
         >
-          return
+          exit
         </button>
       </div>
+    </div>
+    <!-- statystyki bob's 27 -->
+    <div
+      id="bobsStatsSection"
+      class="bg-[#BDC3C7] w-[600px] h-[500px] hidden justify-evenly items-center flex-col rounded-xl p-5"
+    >
+      <h1 class="text-6xl font-bold uppercase">Game stats</h1>
+      <div class="flex flex-row justify-evenly w-[600px]"></div>
+      <button
+        id="bobsStatsReturnBtn"
+        type="button"
+        class="text-white bg-[#002B5B] hover:bg-[#235792] font-medium rounded-lg text-lg uppercase p-1 w-44"
+        onClick="window.location.reload();"
+      >
+        close
+      </button>
     </div>
 
     <div
@@ -385,10 +401,10 @@
             <select
               class="bg-white w-32 h-8 text-center rounded-lg"
               name="mode"
-              id="atwMode"
+              id="bobsMode"
             >
-              <option selected value="Ascending">Easy</option>
-              <option value="Random">Hard</option>
+              <option selected value="Easy">Easy</option>
+              <option value="Hard">Hard</option>
             </select>
           </div>
           <button

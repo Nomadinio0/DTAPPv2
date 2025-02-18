@@ -7,4 +7,6 @@ export const atwReturnBtn = document.getElementById("atwReturnBtn");
 export const bobsBtn = document.getElementById("bobsBtn");
 export const bobsStartBtn = document.getElementById("bobsStartBtn");
 export const bobsReturnBtn = document.getElementById("bobsReturnBtn");
-export const statsReturnBtn = document.getElementById("statsReturnBtn");
+export const matchStatsReturnBtn = document.getElementById(
+  "matchStatsReturnBtn"
+);
