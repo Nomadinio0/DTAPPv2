@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="./output.css" rel="stylesheet" />
   </head>
-  <body class="bg-[#7F8C8D] flex h-screen justify-center items-center">
+  <body class="flex h-screen justify-center items-center">
     <div
       id="matchStartSection"
       class="bg-[#BDC3C7] w-[600px] h-[500px] hidden grid-cols-12 grid-rows-12 gap-2 rounded-xl p-5"
@@ -202,9 +202,9 @@
         id=""
         class="border text-center col-span-full row-span-5 flex items-center justify-around font-bold w-full"
       >
-        <div id="bobsPercent" class="w-[100px]">20%</div>
-        <div id="bobsScore" class="text-5xl">Score</div>
-        <div id="bobsHits" class="w-[100px]">0/3</div>
+        <div id="bobsPercent" class="w-[100px]"></div>
+        <div id="bobsScore" class="text-5xl"></div>
+        <div id="bobsHits" class="w-[100px]"></div>
       </div>
 
       <div
@@ -230,13 +230,24 @@
         </button>
       </div>
     </div>
-    <!-- statystyki bob's 27 -->
+    <!-- sekcja statystyk bob's 27 -->
     <div
       id="bobsStatsSection"
       class="bg-[#BDC3C7] w-[600px] h-[500px] hidden justify-evenly items-center flex-col rounded-xl p-5"
     >
-      <h1 class="text-6xl font-bold uppercase">Game stats</h1>
-      <div class="flex flex-row justify-evenly w-[600px]"></div>
+      <h1 class="text-6xl font-bold uppercase">Game over</h1>
+      <div class="flex flex-col justify-evenly items-center w-[600px]">
+        <p class="text-2xl">
+          Difficulty: <span class="bobsDifficulty font-bold"></span>
+        </p>
+        <p class="text-2xl">Score: <span class="bobsScore font-bold"></span></p>
+        <p class="text-2xl">
+          Darts hit: <span class="bobsHits font-bold"></span>
+        </p>
+        <p class="text-2xl">
+          Percentage: <span class="bobsPercentage font-bold"></span>
+        </p>
+      </div>
       <button
         id="bobsStatsReturnBtn"
         type="button"
@@ -401,7 +412,7 @@
             <select
               class="bg-white w-32 h-8 text-center rounded-lg"
               name="mode"
-              id="bobsMode"
+              id="bobsDifficulty"
             >
               <option selected value="Easy">Easy</option>
               <option value="Hard">Hard</option>

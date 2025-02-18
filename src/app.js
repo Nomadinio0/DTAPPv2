@@ -51,6 +51,19 @@ function hideSection() {
   visibleSection.classList.add("hidden");
 }
 
+function showBobStats(bobStats) {
+  document.querySelector(".bobsScore").innerHTML = bobStats.currentScore;
+  document.querySelector(".bobsDifficulty").innerHTML = bobStats.difficulty;
+  document.querySelector(
+    ".bobsHits"
+  ).innerHTML = `${bobStats.dartHits}/${bobStats.dartTotal}`;
+  document.querySelector(
+    ".bobsPercentage"
+  ).innerHTML = `${bobStats.percentage.toFixed(2)}%`;
+  classToggle(bobsStatsSection, "flex");
+  classToggle(bobsStartSection, "grid");
+}
+
 function showMatchStats(playerOne, playerTwo) {
   document.querySelector(".pOneName").innerHTML = playerOne.name;
   document.querySelector(".pOneSets").innerHTML = playerOne.setsWon;
@@ -195,16 +208,9 @@ function matchSettingsReset(playerOne, playerTwo, matchSettings) {
   playerTwoAverageBox.innerHTML = `AVG: ${playerTwo.average.toFixed(2)}`;
 }
 
-function bobsInput(
-  target,
-  dartTotal,
-  dartHits,
-  percentage,
-  currentScore,
-  difficulty
-) {
+function bobsInput(bobStats) {
   let scoreInput = document.getElementById("bobsInput");
-  let round = 0;
+  // let round = 0;
 
   scoreInput.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
@@ -215,33 +221,29 @@ function bobsInput(
         scoreInput.value = "";
         return;
       } else {
-        dartTotal += 3;
-        dartHits += score;
-        percentage = (dartHits / dartTotal) * 100;
+        bobStats.dartTotal += 3;
+        bobStats.dartHits += score;
+        bobStats.percentage = (bobStats.dartHits / bobStats.dartTotal) * 100;
         if (score == 0) {
-          currentScore = currentScore - getTargetByIndex(round);
+          bobStats.currentScore =
+            bobStats.currentScore - getTargetByIndex(bobStats.round);
         } else {
-          currentScore = currentScore + getTargetByIndex(round) * score;
+          bobStats.currentScore =
+            bobStats.currentScore + getTargetByIndex(bobStats.round) * score;
         }
       }
 
-      bobsHits.innerHTML = `${dartHits} / ${dartTotal}`;
-      bobsScore.innerHTML = currentScore;
-      bobsPercent.innerHTML = `${percentage.toFixed(2)}%`;
-      round++;
-      if (difficulty == "Hard" && currentScore <= 0) {
-        alert("Wynik spadł poniżej 0. Koniec gry!");
-        classToggle(bobsStartSection, "grid");
-        classToggle(mainMenuSection, "flex");
-        return;
+      bobsHits.innerHTML = `${bobStats.dartHits} / ${bobStats.dartTotal}`;
+      bobsScore.innerHTML = bobStats.currentScore;
+      bobsPercent.innerHTML = `${bobStats.percentage.toFixed(2)}%`;
+      bobStats.round++;
+      if (bobStats.difficulty == "Hard" && bobStats.currentScore <= 0) {
+        showBobStats(bobStats);
       }
-      if (round == 21) {
-        alert("Koniec gry!");
-        classToggle(bobsStartSection, "grid");
-        classToggle(mainMenuSection, "flex");
-        return;
+      if (bobStats.round == 21) {
+        showBobStats(bobStats);
       }
-      bobsTarget.innerHTML = doubleTargets[round].description;
+      bobsTarget.innerHTML = doubleTargets[bobStats.round].description;
     }
   });
 }
@@ -358,7 +360,7 @@ function matchInput(
             playerOne.legScore = 0;
             playerTwo.legScore = 0;
             if (playerTurn().setsWon == matchSettings.setDistance) {
-              // alert(`Wygrywa ${playerOne.name}!`);
+              // wygrana
               showMatchStats(playerOne, playerTwo);
               matchSettingsReset(playerOne, playerTwo, matchSettings);
             }
@@ -457,18 +459,27 @@ function matchHandle() {
 }
 
 function bobsHandle() {
-  let target = 1;
-  let dartTotal = 0;
-  let dartHits = 0;
-  let percentage = 0;
-  let currentScore = 27;
-  let difficulty = bobsMode.value;
-  bobsHits.innerHTML = `${dartHits} / ${dartTotal}`;
-  bobsScore.innerHTML = currentScore;
-  bobsPercent.innerHTML = percentage;
-  bobsTarget.innerHTML = `Double ${target}`;
-
-  bobsInput(target, dartTotal, dartHits, percentage, currentScore, difficulty);
+  let bobStats = {
+    round: 0,
+    dartTotal: 0,
+    dartHits: 0,
+    percentage: 0,
+    currentScore: 27,
+    difficulty: document.getElementById("bobsDifficulty").value,
+  };
+  // let target = 1;
+  // let round = 0;
+  // let dartTotal = 0;
+  // let dartHits = 0;
+  // let percentage = 0;
+  // let currentScore = 27;
+  // let difficulty = document.getElementById("bobsDifficulty").value;
+  bobsHits.innerHTML = `${bobStats.dartHits} / ${bobStats.dartTotal}`;
+  bobsScore.innerHTML = bobStats.currentScore;
+  bobsPercent.innerHTML = bobStats.percentage;
+  bobsTarget.innerHTML = doubleTargets[bobStats.round].description;
+  // bobsTarget.innerHTML = `Double ${target}`;
+  bobsInput(bobStats);
 }
 
 matchBtn.addEventListener("click", function () {
