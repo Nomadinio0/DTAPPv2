@@ -1,3 +1,4 @@
+import { atwTargets } from "./modules/atwTargets.js";
 import { doubleTargets } from "./modules/bobsTargets.js";
 import {
   bobsHits,
@@ -5,6 +6,7 @@ import {
   bobsScore,
   bobsTarget,
   playerOneAverageBox,
+  playerOneBox,
   playerOneCheckoutBox,
   playerOneDartsBox,
   playerOneLegsBox,
@@ -13,6 +15,7 @@ import {
   playerOneScoreBox,
   playerOneSetsBox,
   playerTwoAverageBox,
+  playerTwoBox,
   playerTwoCheckoutBox,
   playerTwoDartsBox,
   playerTwoLegsBox,
@@ -39,10 +42,11 @@ import {
   atwStartSection,
   bobsSection,
   bobsStartSection,
+  bobsStatsSection,
   mainMenuSection,
   matchSection,
   matchStartSection,
-  statsSection,
+  matchStatsSection,
 } from "/src/modules/sections.js";
 
 function hideSection() {
@@ -52,6 +56,8 @@ function hideSection() {
 }
 
 function showBobStats(bobStats) {
+  classToggle(bobsStatsSection, "flex");
+  classToggle(bobsStartSection, "grid");
   document.querySelector(".bobsScore").innerHTML = bobStats.currentScore;
   document.querySelector(".bobsDifficulty").innerHTML = bobStats.difficulty;
   document.querySelector(
@@ -60,11 +66,11 @@ function showBobStats(bobStats) {
   document.querySelector(
     ".bobsPercentage"
   ).innerHTML = `${bobStats.percentage.toFixed(2)}%`;
-  classToggle(bobsStatsSection, "flex");
-  classToggle(bobsStartSection, "grid");
 }
 
 function showMatchStats(playerOne, playerTwo) {
+  classToggle(matchStatsSection, "flex");
+  classToggle(matchStartSection, "grid");
   document.querySelector(".pOneName").innerHTML = playerOne.name;
   document.querySelector(".pOneSets").innerHTML = playerOne.setsWon;
   document.querySelector(".pOneLegs").innerHTML = playerOne.legsWon;
@@ -85,8 +91,6 @@ function showMatchStats(playerOne, playerTwo) {
   document.querySelector(".pTwo130").innerHTML = playerTwo.ton30plus;
   document.querySelector(".pTwo170").innerHTML = playerTwo.ton70plus;
   document.querySelector(".pTwo180").innerHTML = playerTwo.ton80;
-  classToggle(statsSection, "flex");
-  classToggle(matchStartSection, "grid");
 }
 
 function legReset(playerOne, playerTwo, matchSettings) {
@@ -233,17 +237,19 @@ function bobsInput(bobStats) {
         }
       }
 
-      bobsHits.innerHTML = `${bobStats.dartHits} / ${bobStats.dartTotal}`;
-      bobsScore.innerHTML = bobStats.currentScore;
-      bobsPercent.innerHTML = `${bobStats.percentage.toFixed(2)}%`;
+      bobsHits.innerHTML = `Hits <br />${bobStats.dartHits} / ${bobStats.dartTotal}`;
+      bobsScore.innerHTML = `Score <br />${bobStats.currentScore}`;
+      bobsPercent.innerHTML = `Percentage <br />${bobStats.percentage.toFixed(
+        2
+      )}%`;
       bobStats.round++;
       if (bobStats.difficulty == "Hard" && bobStats.currentScore <= 0) {
         showBobStats(bobStats);
-      }
-      if (bobStats.round == 21) {
+      } else if (bobStats.round == 21) {
         showBobStats(bobStats);
+      } else {
+        bobsTarget.innerHTML = doubleTargets[bobStats.round].description;
       }
-      bobsTarget.innerHTML = doubleTargets[bobStats.round].description;
     }
   });
 }
@@ -272,11 +278,11 @@ function matchInput(
 
   function highlightPlayer() {
     if (playerOneTurn) {
-      playerOneNameBox.classList.add("text-3xl", "font-bold");
-      playerTwoNameBox.classList.remove("text-3xl", "font-bold");
+      playerOneBox.classList.add("bg-[#befcc3]");
+      playerTwoBox.classList.remove("bg-[#befcc3]");
     } else {
-      playerTwoNameBox.classList.add("text-3xl", "font-bold");
-      playerOneNameBox.classList.remove("text-3xl", "font-bold");
+      playerTwoBox.classList.add("bg-[#befcc3]");
+      playerOneBox.classList.remove("bg-[#befcc3]");
     }
   }
 
@@ -409,10 +415,10 @@ function matchInput(
       ).innerHTML = `${currentPlayerRemainScore}`;
       document.getElementById(
         currentScoreBox
-      ).innerHTML = `Last score: ${score}`;
+      ).innerHTML = `Last score <br />${score}`;
       document.getElementById(
         dartCountBox
-      ).innerHTML = `Darts: ${currentPlayerDartsCount}`;
+      ).innerHTML = `Darts <br />${currentPlayerDartsCount}`;
       if (onFinish(currentPlayerRemainScore)) {
         document.getElementById(currentCheckoutBox).innerHTML = onFinish(
           currentPlayerRemainScore
@@ -422,7 +428,7 @@ function matchInput(
       }
       document.getElementById(
         currentAverageBox
-      ).innerHTML = `Avg: ${currentPlayerAvg.toFixed(2)}`;
+      ).innerHTML = `Avg <br />${currentPlayerAvg.toFixed(2)}`;
 
       // Aktualizacja wyniku gracza
       playerTurn().remainScore = currentPlayerRemainScore;
@@ -440,22 +446,28 @@ function matchInput(
 
 function matchHandle() {
   let matchSettings = loadMatchSettings();
-  let playerOne = loadPlayerOne();
-  let playerTwo = loadPlayerTwo();
-  let currentSet = 1;
-  let currentLeg = 1;
-  playerOne.remainScore = matchSettings.distance;
-  playerTwo.remainScore = matchSettings.distance;
-  playerOneNameBox.innerHTML = matchSettings.p1Name;
-  playerTwoNameBox.innerHTML = matchSettings.p2Name;
-  playerOneRemainBox.innerHTML = matchSettings.distance;
-  playerTwoRemainBox.innerHTML = matchSettings.distance;
-  playerOneLegsBox.innerHTML = `Legs: ${playerOne.legScore}`;
-  playerTwoLegsBox.innerHTML = `Legs: ${playerTwo.legScore}`;
-  playerOneSetsBox.innerHTML = `Sets: ${playerOne.setsWon}`;
-  playerTwoSetsBox.innerHTML = `Sets: ${playerTwo.setsWon}`;
-
-  matchInput(playerOne, playerTwo, matchSettings, currentLeg, currentSet);
+  if (matchSettings.p1Name === "" || matchSettings.p2Name === "") {
+    alert("Popraw dane. Gracze muszą mieć nazwy!");
+    return;
+  } else {
+    classToggle(matchStartSection, "grid");
+    classToggle(mainMenuSection, "flex");
+    let playerOne = loadPlayerOne();
+    let playerTwo = loadPlayerTwo();
+    let currentSet = 1;
+    let currentLeg = 1;
+    playerOne.remainScore = matchSettings.distance;
+    playerTwo.remainScore = matchSettings.distance;
+    playerOneNameBox.innerHTML = matchSettings.p1Name;
+    playerTwoNameBox.innerHTML = matchSettings.p2Name;
+    playerOneRemainBox.innerHTML = matchSettings.distance;
+    playerTwoRemainBox.innerHTML = matchSettings.distance;
+    playerOneLegsBox.innerHTML = `Legs: ${playerOne.legScore}`;
+    playerTwoLegsBox.innerHTML = `Legs: ${playerTwo.legScore}`;
+    playerOneSetsBox.innerHTML = `Sets: ${playerOne.setsWon}`;
+    playerTwoSetsBox.innerHTML = `Sets: ${playerTwo.setsWon}`;
+    matchInput(playerOne, playerTwo, matchSettings, currentLeg, currentSet);
+  }
 }
 
 function bobsHandle() {
@@ -474,9 +486,9 @@ function bobsHandle() {
   // let percentage = 0;
   // let currentScore = 27;
   // let difficulty = document.getElementById("bobsDifficulty").value;
-  bobsHits.innerHTML = `${bobStats.dartHits} / ${bobStats.dartTotal}`;
-  bobsScore.innerHTML = bobStats.currentScore;
-  bobsPercent.innerHTML = bobStats.percentage;
+  bobsHits.innerHTML = `Hits <br />${bobStats.dartHits} / ${bobStats.dartTotal}`;
+  bobsScore.innerHTML = `Score <br />${bobStats.currentScore}`;
+  bobsPercent.innerHTML = `Percentage <br />${bobStats.percentage.toFixed(2)}%`;
   bobsTarget.innerHTML = doubleTargets[bobStats.round].description;
   // bobsTarget.innerHTML = `Double ${target}`;
   bobsInput(bobStats);
@@ -488,8 +500,6 @@ matchBtn.addEventListener("click", function () {
 });
 
 matchStartBtn.addEventListener("click", function () {
-  classToggle(matchStartSection, "grid");
-  classToggle(mainMenuSection, "flex");
   matchHandle();
 });
 
@@ -499,7 +509,7 @@ matchReturnBtn.addEventListener("click", function () {
 });
 
 matchStatsReturnBtn.addEventListener("click", function () {
-  classToggle(statsSection, "flex");
+  classToggle(matchStatsSection, "flex");
   classToggle(mainMenuSection, "flex");
 });
 

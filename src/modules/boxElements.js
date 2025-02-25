@@ -1,3 +1,5 @@
+export const playerOneBox = document.getElementById("playerOneBox");
+export const playerTwoBox = document.getElementById("playerTwoBox");
 export const playerOneNameBox = document.getElementById("playerOneNameBox");
 export const playerTwoNameBox = document.getElementById("playerTwoNameBox");
 export const playerOneRemainBox = document.getElementById("playerOneRemainBox");

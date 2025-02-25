@@ -6,117 +6,117 @@
     <link href="./output.css" rel="stylesheet" />
   </head>
   <body class="flex h-screen justify-center items-center">
+    <!-- sekcja gry X01 Double Out -->
     <div
       id="matchStartSection"
-      class="bg-[#BDC3C7] w-[600px] h-[500px] hidden grid-cols-12 grid-rows-12 gap-2 rounded-xl p-5"
+      class="bg-[#BDC3C7] w-[600px] h-[500px] hidden grid-cols-12 grid-rows-12 rounded-xl p-5"
     >
       <div
-        id="playerOneNameBox"
-        class="text-center col-span-6 row-span-2 flex items-center justify-center text-3xl font-bold"
+        id="playerOneBox"
+        class="grid grid-rows-12 grid-cols-6 col-span-6 row-span-10 place-items-center rounded-tl-3xl rounded-bl-3xl bg-[#befcc3]"
       >
-        Player 1
+        <div
+          id="playerOneNameBox"
+          class="row-span-3 col-span-6 text-3xl font-bold"
+        ></div>
+        <div
+          id="playerOneSetsBox"
+          class="row-span-1 col-span-3 font-bold text-center place-items-center"
+        >
+          Set:
+        </div>
+        <div
+          id="playerOneLegsBox"
+          class="row-span-1 col-span-3 font-bold text-center"
+        >
+          Legs:
+        </div>
+        <div
+          id="playerOneRemainBox"
+          class="row-span-4 col-span-6 text-center text-6xl font-bold"
+        ></div>
+        <div
+          id="playerOneCheckoutBox"
+          class="row-span-2 col-span-6 text-center"
+        ></div>
+        <div id="playerOneScoreBox" class="row-span-2 col-span-2 text-center">
+          Last score <br />0
+        </div>
+        <div id="playerOneAvgBox" class="row-span-2 col-span-2 text-center">
+          Avg <br />0
+        </div>
+        <div id="playerOneDartsBox" class="row-span-2 col-span-2 text-center">
+          Darts <br />0
+        </div>
       </div>
+      <!-- Player 2 -->
       <div
-        id="playerTwoNameBox"
-        class="text-center col-span-6 row-span-2 flex items-center justify-center"
+        id="playerTwoBox"
+        class="grid grid-rows-12 grid-cols-6 col-span-6 row-span-10 place-items-center rounded-tr-3xl rounded-br-3xl"
       >
-        Player 2
+        <div
+          id="playerTwoNameBox"
+          class="row-span-3 col-span-6 text-3xl font-bold"
+        ></div>
+        <div
+          id="playerTwoSetsBox"
+          class="row-span-1 col-span-3 font-bold text-center place-items-center"
+        >
+          Set:
+        </div>
+        <div
+          id="playerTwoLegsBox"
+          class="row-span-1 col-span-3 font-bold text-center"
+        >
+          Legs:
+        </div>
+        <div
+          id="playerTwoRemainBox"
+          class="row-span-4 col-span-6 text-center text-6xl font-bold"
+        ></div>
+
+        <div
+          id="playerTwoCheckoutBox"
+          class="row-span-2 col-span-6 text-center"
+        ></div>
+        <div id="playerTwoScoreBox" class="row-span-2 col-span-2 text-center">
+          Last score <br />0
+        </div>
+        <div id="playerTwoAvgBox" class="row-span-2 col-span-2 text-center">
+          Avg <br />0
+        </div>
+        <div id="playerTwoDartsBox" class="row-span-2 col-span-2 text-center">
+          Darts <br />0
+        </div>
       </div>
+
       <div
-        id="playerOneSetsBox"
-        class="border text-center col-span-3 row-span-1 flex items-center justify-center"
+        class="col-span-6 row-span-2 text-center place-items-center content-center"
       >
-        Set:
-      </div>
-      <div
-        id="playerOneLegsBox"
-        class="border text-center col-span-3 row-span-1 flex items-center justify-center"
-      >
-        Legs:
-      </div>
-      <div
-        id="playerTwoSetsBox"
-        class="border text-center col-span-3 row-span-1 flex items-center justify-center"
-      >
-        Set:
-      </div>
-      <div
-        id="playerTwoLegsBox"
-        class="border text-center col-span-3 row-span-1 flex items-center justify-center"
-      >
-        Legs:
-      </div>
-      <div
-        id="playerOneRemainBox"
-        class="border text-center col-span-6 row-span-5 flex items-center justify-center text-6xl"
-      ></div>
-      <div
-        id="playerTwoRemainBox"
-        class="border text-center col-span-6 row-span-5 flex items-center justify-center text-6xl"
-      ></div>
-      <div
-        id="playerOneCheckoutBox"
-        class="border text-center col-span-4 row-span-2 flex items-center justify-center"
-      ></div>
-      <div
-        id="playerOneScoreBox"
-        class="border text-center col-span-2 row-span-2 flex items-center justify-center"
-      ></div>
-      <div
-        id="playerTwoScoreBox"
-        class="border text-center col-span-2 row-span-2 flex items-center justify-center"
-      ></div>
-      <div
-        id="playerTwoCheckoutBox"
-        class="border text-center col-span-4 row-span-2 flex items-center justify-center"
-      ></div>
-      <div
-        id="playerOneAvgBox"
-        class="border col-span-3 row-span-1 flex items-center justify-center"
-      ></div>
-      <div
-        id="playerOneDartsBox"
-        class="border col-span-3 row-span-1 flex items-center justify-center"
-      >
-        Darts: 0
-      </div>
-      <div
-        id="playerTwoAvgBox"
-        class="border col-span-3 row-span-1 flex items-center justify-center"
-      ></div>
-      <div
-        id="playerTwoDartsBox"
-        class="border col-span-3 row-span-1 flex items-center justify-center border-"
-      >
-        Darts: 0
-      </div>
-      <div
-        class="text-center col-span-6 row-span-2 flex items-center justify-around"
-      >
-        <label class="px-4" for="matchInput">Enter score:</label>
         <input
-          class="bg-white text-center w-24 text-xl rounded-lg"
+          class="bg-white text-center font-medium rounded-lg text-lg uppercase p-1 w-44"
           type="number"
           name="matchInput"
           id="matchInput"
+          placeholder="score"
         />
       </div>
       <div
-        class="text-center col-span-6 row-span-2 flex items-center justify-center"
+        class="text-center col-span-3 row-span-2 col-start-10 place-items-center content-center"
       >
         <button
           id="matchReturnBtn"
           type="button"
-          class="text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-lg uppercase p-1 w-44"
+          class="text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-lg uppercase p-1 w-24"
           onClick="window.location.reload();"
         >
           Exit
         </button>
       </div>
     </div>
-    <!-- sekcja statystyk meczowych -->
+    <!-- sekcja statystyk X01 Double Out -->
     <div
-      id="statsSection"
+      id="matchStatsSection"
       class="bg-[#BDC3C7] w-[600px] h-[500px] hidden justify-evenly items-center flex-col rounded-xl p-5"
     >
       <h1 class="text-6xl font-bold uppercase">Game stats</h1>
@@ -167,44 +167,64 @@
         close
       </button>
     </div>
-    <!-- sekcja Around the world -->
+    <!-- sekcja gry Around the World -->
     <div
       id="atwStartSection"
-      class="bg-[#BDC3C7] w-[600px] h-5/6 hidden rounded-xl p-5"
+      class="bg-[#BDC3C7] w-[600px] h-[500px] hidden grid-cols-12 gap-2 rounded-xl p-5"
     >
       ATW
       <button
         id="atwReturnBtn"
         type="button"
         class="text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-lg uppercase p-1 w-44"
+        onClick="window.location.reload();"
       >
         exit
       </button>
     </div>
-    <!-- sekcja Bobs 27 -->
+    <!-- sekcja statystyk Around the World -->
+    <div
+      id="atwStatsSection"
+      class="bg-[#BDC3C7] w-[600px] h-[500px] hidden justify-evenly items-center flex-col rounded-xl p-5"
+    >
+      <h1 class="text-6xl font-bold uppercase">Game stats</h1>
+      <div class="flex flex-col justify-evenly items-center w-[600px]">
+        <div class="font-bold text-2xl"></div>
+        <div class="font-bold text-2xl"></div>
+        <div class="font-bold text-2xl"></div>
+        <div class="font-bold text-2xl"></div>
+      </div>
+
+      <button
+        id="atwStatsReturnBtn"
+        type="button"
+        class="text-white bg-[#002B5B] hover:bg-[#235792] font-medium rounded-lg text-lg uppercase p-1 w-44"
+        onClick="window.location.reload();"
+      >
+        close
+      </button>
+    </div>
+    <!-- sekcja gry Bobs 27 -->
     <div
       id="bobsStartSection"
-      class="bg-[#BDC3C7] w-[600px] h-[500px] hidden grid-cols-12 grid-rows-auto gap-2 rounded-xl p-5"
+      class="bg-[#BDC3C7] w-[600px] h-[500px] hidden grid-cols-12 gap-2 rounded-xl p-5"
     >
       <div
-        id=""
-        class="border text-center col-span-full row-span-1 flex items-center justify-center text-3xl font-bold"
+        class="text-center col-span-full row-span-3 flex items-center justify-center text-3xl font-bold"
       >
-        <h1 class="text-2xl">Bob's 27</h1>
+        <h1 class="text-4xl">Bob's 27</h1>
       </div>
       <div
         id="bobsTarget"
-        class="border text-center col-span-full row-span-2 flex items-center justify-center text-3xl font-bold"
-      >
-        Target:
-      </div>
+        class="rounded-xl col-span-4 row-span-1 text-3xl font-bold text-center grid place-items-center col-start-5 bg-[#befcc3]"
+      ></div>
       <div
         id=""
-        class="border text-center col-span-full row-span-5 flex items-center justify-around font-bold w-full"
+        class="text-center col-span-full row-span-3 grid grid-cols-12 grid-flow-row font-bold"
       >
-        <div id="bobsPercent" class="w-[100px]"></div>
-        <div id="bobsScore" class="text-5xl"></div>
-        <div id="bobsHits" class="w-[100px]"></div>
+        <div id="bobsPercent" class="col-span-4 content-center text-xl"></div>
+        <div id="bobsScore" class="col-span-4 content-center text-xl"></div>
+        <div id="bobsHits" class="col-span-4 content-center text-xl"></div>
       </div>
 
       <div
@@ -225,6 +245,7 @@
           id="bobsReturnBtn"
           type="button"
           class="text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-lg uppercase p-1 w-44"
+          onClick="window.location.reload();"
         >
           exit
         </button>
@@ -235,7 +256,7 @@
       id="bobsStatsSection"
       class="bg-[#BDC3C7] w-[600px] h-[500px] hidden justify-evenly items-center flex-col rounded-xl p-5"
     >
-      <h1 class="text-6xl font-bold uppercase">Game over</h1>
+      <h1 class="text-6xl font-bold uppercase">Game stats</h1>
       <div class="flex flex-col justify-evenly items-center w-[600px]">
         <p class="text-2xl">
           Difficulty: <span class="bobsDifficulty font-bold"></span>
@@ -257,7 +278,7 @@
         close
       </button>
     </div>
-
+    <!-- sekcja menu głównego -->
     <div
       id="mainMenuSection"
       class="bg-[#BDC3C7] w-[800px] h-[500px] flex justify-center items-center rounded-lg"
@@ -303,7 +324,6 @@
                 name=""
                 type="text"
                 placeholder="Player 1"
-                value="Player 1"
               />
             </div>
             <div class="m-2">
@@ -313,15 +333,14 @@
                 name=""
                 type="text"
                 placeholder="Player 2"
-                value="Player 2"
               />
             </div>
           </div>
           <div class="flex justify-between items-center w-3/4 mb-2">
-            <label class="text-2xl" for="mode">Distance</label>
+            <label class="text-2xl" for="distance">Distance</label>
             <select
               class="bg-white w-16 h-8 text-center rounded-lg"
-              name="mode"
+              name="distance"
               id="distance"
             >
               <option value="170">170</option>
@@ -369,15 +388,15 @@
           </h1>
           <div class="text-center mb-2">
             <p>
-              Score every sector on the board. <br />Scoring: <br />single - 1
+              Score every section of the board. <br />Scoring: <br />single - 1
               point <br />double - 2 points <br />triple - 3 points
             </p>
           </div>
           <div class="flex justify-between items-center w-3/4 mb-2">
-            <label class="text-2xl" for="mode">Order</label>
+            <label class="text-2xl" for="atwMode">Order</label>
             <select
               class="bg-white w-32 h-8 text-center rounded-lg"
-              name="mode"
+              name="atwMode"
               id="atwMode"
             >
               <option selected value="Ascending">Ascending</option>
@@ -406,12 +425,14 @@
               Train Your doubles by scoring every double sector one by one
               starting with D1 ending on Bull.
             </p>
+            <p>Easy - you still play while on negative score</p>
+            <p>Hard - you lose if you go below 0 points</p>
           </div>
           <div class="flex justify-between items-center w-3/4 mb-2">
-            <label class="text-2xl" for="mode">Difficulty</label>
+            <label class="text-2xl" for="bobsDifficulty">Difficulty</label>
             <select
               class="bg-white w-32 h-8 text-center rounded-lg"
-              name="mode"
+              name="bobsDifficulty"
               id="bobsDifficulty"
             >
               <option selected value="Easy">Easy</option>

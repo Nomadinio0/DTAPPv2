@@ -6,4 +6,4 @@ export const atwStartSection = document.getElementById("atwStartSection");
 export const bobsSection = document.getElementById("bobsSection");
 export const bobsStartSection = document.getElementById("bobsStartSection");
 export const bobsStatsSection = document.getElementById("bobsStatsSection");
-export const statsSection = document.getElementById("statsSection");
+export const matchStatsSection = document.getElementById("matchStatsSection");
