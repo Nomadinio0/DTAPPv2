@@ -8,7 +8,10 @@ export const atwTripleBtn = document.getElementById("atwTripleBtn");
 export const atwNoscoreBtn = document.getElementById("atwNoscoreBtn");
 export const bobsBtn = document.getElementById("bobsBtn");
 export const bobsStartBtn = document.getElementById("bobsStartBtn");
-export const bobsReturnBtn = document.getElementById("bobsReturnBtn");
+export const bobsSingleBtn = document.getElementById("bobsSingleBtn");
+export const bobsDoubleBtn = document.getElementById("bobsDoubleBtn");
+export const bobsTripleBtn = document.getElementById("bobsTripleBtn");
+export const bobsNoscoreBtn = document.getElementById("bobsNoscoreBtn");
 export const matchStatsReturnBtn = document.getElementById(
   "matchStatsReturnBtn"
 );

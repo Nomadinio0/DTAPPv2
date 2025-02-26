@@ -24,6 +24,7 @@ export const bobsPercentBox = document.getElementById("bobsPercentBox");
 export const bobsScoreBox = document.getElementById("bobsScoreBox");
 export const bobsHitsBox = document.getElementById("bobsHitsBox");
 export const bobsTargetBox = document.getElementById("bobsTargetBox");
+export const bobsButtonBox = document.getElementById("bobsButtonBox");
 export const atwButtonBox = document.getElementById("atwButtonBox");
 export const atwTargetBox = document.getElementById("atwTargetBox");
 export const atwHitsBox = document.getElementById("atwHitsBox");

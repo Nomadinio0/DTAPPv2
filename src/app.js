@@ -5,6 +5,7 @@ import {
   atwPercentBox,
   atwScoreBox,
   atwTargetBox,
+  bobsButtonBox,
   bobsHitsBox,
   bobsPercentBox,
   bobsScoreBox,
@@ -33,7 +34,6 @@ import {
   atwStartBtn,
   atwTripleBtn,
   bobsBtn,
-  bobsReturnBtn,
   bobsStartBtn,
   matchBtn,
   matchStartBtn,
@@ -62,10 +62,10 @@ function hideSection() {
 function showBobStats(bobStats) {
   classToggle(bobsStatsSection, "flex");
   classToggle(bobsStartSection, "grid");
-  document.querySelector(".bobsScoreBox").innerHTML = bobStats.currentScore;
+  document.querySelector(".bobsScore").innerHTML = bobStats.currentScore;
   document.querySelector(".bobsDifficulty").innerHTML = bobStats.difficulty;
   document.querySelector(
-    ".bobsHitsBox"
+    ".bobsHits"
   ).innerHTML = `${bobStats.dartHits}/${bobStats.dartTotal}`;
   document.querySelector(
     ".bobsPercentage"
@@ -228,44 +228,42 @@ function matchSettingsReset(playerOne, playerTwo, matchSettings) {
 }
 
 function bobsInput(bobStats) {
-  let scoreInput = document.getElementById("bobsInput");
+  let score = 0;
 
-  scoreInput.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-      let score = parseInt(scoreInput.value, 10);
+  bobsButtonBox.addEventListener("click", function (event) {
+    if (event.target.id === "bobsSingleBtn") {
+      score = 1;
+    } else if (event.target.id === "bobsDoubleBtn") {
+      score = 2;
+    } else if (event.target.id === "bobsTripleBtn") {
+      score = 3;
+    } else if (event.target.id === "bobsNoscoreBtn") {
+      score = 0;
+    }
+    bobStats.dartTotal += 3;
+    bobStats.dartHits += score;
+    bobStats.percentage = (bobStats.dartHits / bobStats.dartTotal) * 100;
+    if (score == 0) {
+      bobStats.currentScore =
+        bobStats.currentScore - getTargetByIndex(bobStats.round, bobsTargets);
+    } else {
+      bobStats.currentScore =
+        bobStats.currentScore +
+        getTargetByIndex(bobStats.round, bobsTargets) * score;
+    }
 
-      if (isNaN(score) || score < 0 || score >= 4) {
-        alert("Błędna wartość!");
-        scoreInput.value = "";
-        return;
-      } else {
-        bobStats.dartTotal += 3;
-        bobStats.dartHits += score;
-        bobStats.percentage = (bobStats.dartHits / bobStats.dartTotal) * 100;
-        if (score == 0) {
-          bobStats.currentScore =
-            bobStats.currentScore -
-            getTargetByIndex(bobStats.round, bobsTargets);
-        } else {
-          bobStats.currentScore =
-            bobStats.currentScore +
-            getTargetByIndex(bobStats.round, bobsTargets) * score;
-        }
-      }
-
-      bobsHitsBox.innerHTML = `Hits <br />${bobStats.dartHits} / ${bobStats.dartTotal}`;
-      bobsScoreBox.innerHTML = `Score <br />${bobStats.currentScore}`;
-      bobsPercentBox.innerHTML = `Percentage <br />${bobStats.percentage.toFixed(
-        2
-      )}%`;
-      bobStats.round++;
-      if (bobStats.difficulty == "Hard" && bobStats.currentScore <= 0) {
-        showBobStats(bobStats);
-      } else if (bobStats.round == 21) {
-        showBobStats(bobStats);
-      } else {
-        bobsTargetBox.innerHTML = bobsTargets[bobStats.round].description;
-      }
+    bobsHitsBox.innerHTML = `Hits <br />${bobStats.dartHits} / ${bobStats.dartTotal}`;
+    bobsScoreBox.innerHTML = `Score <br />${bobStats.currentScore}`;
+    bobsPercentBox.innerHTML = `Percentage <br />${bobStats.percentage.toFixed(
+      2
+    )}%`;
+    bobStats.round++;
+    if (bobStats.difficulty == "Hard" && bobStats.currentScore <= 0) {
+      showBobStats(bobStats);
+    } else if (bobStats.round == 21) {
+      showBobStats(bobStats);
+    } else {
+      bobsTargetBox.innerHTML = bobsTargets[bobStats.round].description;
     }
   });
 }
@@ -611,9 +609,4 @@ bobsStartBtn.addEventListener("click", function () {
   classToggle(bobsStartSection, "grid");
   classToggle(mainMenuSection, "flex");
   bobsHandle();
-});
-
-bobsReturnBtn.addEventListener("click", function () {
-  classToggle(bobsStartSection, "grid");
-  classToggle(mainMenuSection, "flex");
 });
