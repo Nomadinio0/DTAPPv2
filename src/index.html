@@ -170,17 +170,65 @@
     <!-- sekcja gry Around the World -->
     <div
       id="atwStartSection"
-      class="bg-[#BDC3C7] w-[600px] h-[500px] hidden grid-cols-12 gap-2 rounded-xl p-5"
+      class="bg-[#BDC3C7] w-[600px] h-[500px] hidden grid-cols-12 grid-rows-12 gap-2 rounded-xl p-5"
     >
-      ATW
-      <button
-        id="atwReturnBtn"
-        type="button"
-        class="text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-lg uppercase p-1 w-44"
-        onClick="window.location.reload();"
+      <div
+        class="text-center col-span-full row-span-3 flex items-center justify-center text-3xl font-bold"
       >
-        exit
-      </button>
+        <h1 class="text-4xl">Around the World</h1>
+      </div>
+      <div
+        id="atwTargetBox"
+        class="rounded-xl col-span-4 row-span-2 text-3xl font-bold text-center grid place-items-center col-start-5 bg-[#7eff89]"
+      ></div>
+      <div
+        class="text-center col-span-full row-span-2 grid grid-cols-12 grid-flow-row font-bold"
+      >
+        <div id="atwPercentBox" class="col-span-4 content-center text-xl"></div>
+        <div id="atwScoreBox" class="col-span-4 content-center text-xl"></div>
+        <div id="atwHitsBox" class="col-span-4 content-center text-xl"></div>
+      </div>
+      <div
+        id="atwButtonBox"
+        class="text-center gap-5 grid grid-cols-2 grid-rows-2 grid-flow-col col-span-6 col-start-4 row-span-3 place-items-center"
+      >
+        <button
+          id="atwSingleBtn"
+          class="text-white bg-[#002B5B] hover:bg-red-800 font-medium rounded-lg text-lg uppercase p-3 w-32"
+        >
+          Single
+        </button>
+        <button
+          id="atwDoubleBtn"
+          class="text-white bg-[#002B5B] hover:bg-red-800 font-medium rounded-lg text-lg uppercase p-3 w-32"
+        >
+          Double
+        </button>
+        <button
+          id="atwTripleBtn"
+          class="text-white bg-[#002B5B] hover:bg-red-800 font-medium rounded-lg text-lg uppercase p-3 w-32 disabled:bg-gray-600"
+        >
+          Triple
+        </button>
+        <button
+          id="atwNoscoreBtn"
+          class="text-white bg-[#002B5B] hover:bg-red-800 font-medium rounded-lg text-lg uppercase p-3 w-32"
+        >
+          No Score
+        </button>
+      </div>
+      <div
+        class="text-center col-span-6 row-span-2 flex items-center justify-around col-start-7"
+      >
+        <button
+          id="atwReturnBtn"
+          type="button"
+          class="text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-lg uppercase p-1 w-44"
+          onClick="window.location.reload();"
+        >
+          exit
+        </button>
+      </div>
     </div>
     <!-- sekcja statystyk Around the World -->
     <div
@@ -189,10 +237,14 @@
     >
       <h1 class="text-6xl font-bold uppercase">Game stats</h1>
       <div class="flex flex-col justify-evenly items-center w-[600px]">
-        <div class="font-bold text-2xl"></div>
-        <div class="font-bold text-2xl"></div>
-        <div class="font-bold text-2xl"></div>
-        <div class="font-bold text-2xl"></div>
+        <p class="text-2xl">Mode: <span class="atwMode font-bold"></span></p>
+        <p class="text-2xl">Score: <span class="atwScore font-bold"></span></p>
+        <p class="text-2xl">
+          Darts hit: <span class="atwHits font-bold"></span>
+        </p>
+        <p class="text-2xl">
+          Percentage: <span class="atwPercentage font-bold"></span>
+        </p>
       </div>
 
       <button
@@ -215,16 +267,18 @@
         <h1 class="text-4xl">Bob's 27</h1>
       </div>
       <div
-        id="bobsTarget"
-        class="rounded-xl col-span-4 row-span-1 text-3xl font-bold text-center grid place-items-center col-start-5 bg-[#befcc3]"
+        id="bobsTargetBox"
+        class="rounded-xl col-span-4 row-span-1 text-3xl font-bold text-center grid place-items-center col-start-5 bg-[#7eff89]"
       ></div>
       <div
-        id=""
         class="text-center col-span-full row-span-3 grid grid-cols-12 grid-flow-row font-bold"
       >
-        <div id="bobsPercent" class="col-span-4 content-center text-xl"></div>
-        <div id="bobsScore" class="col-span-4 content-center text-xl"></div>
-        <div id="bobsHits" class="col-span-4 content-center text-xl"></div>
+        <div
+          id="bobsPercentBox"
+          class="col-span-4 content-center text-xl"
+        ></div>
+        <div id="bobsScoreBox" class="col-span-4 content-center text-xl"></div>
+        <div id="bobsHitsBox" class="col-span-4 content-center text-xl"></div>
       </div>
 
       <div
@@ -401,6 +455,7 @@
             >
               <option selected value="Ascending">Ascending</option>
               <option value="Random">Random</option>
+              <option value="Descending">Descending</option>
               <option value="Clockwise">Clockwise</option>
             </select>
           </div>

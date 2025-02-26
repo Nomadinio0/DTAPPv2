@@ -1,10 +1,14 @@
-import { atwTargets } from "./modules/atwTargets.js";
-import { doubleTargets } from "./modules/bobsTargets.js";
+import { atwTargets, bobsTargets } from "./modules/targets.js";
 import {
-  bobsHits,
-  bobsPercent,
-  bobsScore,
-  bobsTarget,
+  atwButtonBox,
+  atwHitsBox,
+  atwPercentBox,
+  atwScoreBox,
+  atwTargetBox,
+  bobsHitsBox,
+  bobsPercentBox,
+  bobsScoreBox,
+  bobsTargetBox,
   playerOneAverageBox,
   playerOneBox,
   playerOneCheckoutBox,
@@ -26,13 +30,12 @@ import {
 } from "/src/modules/boxElements.js";
 import {
   atwBtn,
-  atwReturnBtn,
   atwStartBtn,
+  atwTripleBtn,
   bobsBtn,
   bobsReturnBtn,
   bobsStartBtn,
   matchBtn,
-  matchReturnBtn,
   matchStartBtn,
   matchStatsReturnBtn,
 } from "/src/modules/buttons.js";
@@ -40,6 +43,7 @@ import checkouts from "/src/modules/checkouts.js";
 import {
   atwSection,
   atwStartSection,
+  atwStatsSection,
   bobsSection,
   bobsStartSection,
   bobsStatsSection,
@@ -58,14 +62,27 @@ function hideSection() {
 function showBobStats(bobStats) {
   classToggle(bobsStatsSection, "flex");
   classToggle(bobsStartSection, "grid");
-  document.querySelector(".bobsScore").innerHTML = bobStats.currentScore;
+  document.querySelector(".bobsScoreBox").innerHTML = bobStats.currentScore;
   document.querySelector(".bobsDifficulty").innerHTML = bobStats.difficulty;
   document.querySelector(
-    ".bobsHits"
+    ".bobsHitsBox"
   ).innerHTML = `${bobStats.dartHits}/${bobStats.dartTotal}`;
   document.querySelector(
     ".bobsPercentage"
   ).innerHTML = `${bobStats.percentage.toFixed(2)}%`;
+}
+
+function showAtwStats(atwStats) {
+  classToggle(atwStatsSection, "flex");
+  classToggle(atwStartSection, "grid");
+  document.querySelector(".atwScore").innerHTML = atwStats.currentScore;
+  document.querySelector(".atwMode").innerHTML = atwStats.mode;
+  document.querySelector(
+    ".atwHits"
+  ).innerHTML = `${atwStats.dartHits}/${atwStats.dartTotal}`;
+  document.querySelector(
+    ".atwPercentage"
+  ).innerHTML = `${atwStats.percentage.toFixed(2)}%`;
 }
 
 function showMatchStats(playerOne, playerTwo) {
@@ -131,10 +148,8 @@ function onFinish(score) {
   }
 }
 
-function getTargetByIndex(index) {
-  return index >= 0 && index < doubleTargets.length
-    ? doubleTargets[index].target
-    : null;
+function getTargetByIndex(index, target) {
+  return index >= 0 && index < target.length ? target[index].target : null;
 }
 
 // Funkcja do załadowania ustawień meczu
@@ -214,7 +229,6 @@ function matchSettingsReset(playerOne, playerTwo, matchSettings) {
 
 function bobsInput(bobStats) {
   let scoreInput = document.getElementById("bobsInput");
-  // let round = 0;
 
   scoreInput.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
@@ -230,16 +244,18 @@ function bobsInput(bobStats) {
         bobStats.percentage = (bobStats.dartHits / bobStats.dartTotal) * 100;
         if (score == 0) {
           bobStats.currentScore =
-            bobStats.currentScore - getTargetByIndex(bobStats.round);
+            bobStats.currentScore -
+            getTargetByIndex(bobStats.round, bobsTargets);
         } else {
           bobStats.currentScore =
-            bobStats.currentScore + getTargetByIndex(bobStats.round) * score;
+            bobStats.currentScore +
+            getTargetByIndex(bobStats.round, bobsTargets) * score;
         }
       }
 
-      bobsHits.innerHTML = `Hits <br />${bobStats.dartHits} / ${bobStats.dartTotal}`;
-      bobsScore.innerHTML = `Score <br />${bobStats.currentScore}`;
-      bobsPercent.innerHTML = `Percentage <br />${bobStats.percentage.toFixed(
+      bobsHitsBox.innerHTML = `Hits <br />${bobStats.dartHits} / ${bobStats.dartTotal}`;
+      bobsScoreBox.innerHTML = `Score <br />${bobStats.currentScore}`;
+      bobsPercentBox.innerHTML = `Percentage <br />${bobStats.percentage.toFixed(
         2
       )}%`;
       bobStats.round++;
@@ -248,8 +264,46 @@ function bobsInput(bobStats) {
       } else if (bobStats.round == 21) {
         showBobStats(bobStats);
       } else {
-        bobsTarget.innerHTML = doubleTargets[bobStats.round].description;
+        bobsTargetBox.innerHTML = bobsTargets[bobStats.round].description;
       }
+    }
+  });
+}
+
+function atwInput(atwStats, atwOrder) {
+  let score = 0;
+  atwButtonBox.addEventListener("click", function (event) {
+    if (event.target.id === "atwSingleBtn") {
+      score = 1;
+    } else if (event.target.id === "atwDoubleBtn") {
+      score = 2;
+    } else if (event.target.id === "atwTripleBtn") {
+      score = 3;
+    } else if (event.target.id === "atwNoscoreBtn") {
+      score = 0;
+    }
+    if (score != 0) {
+      atwStats.dartHits++;
+    }
+    atwStats.dartTotal++;
+    atwStats.currentScore += score;
+    atwStats.percentage = (atwStats.dartHits / atwStats.dartTotal) * 100;
+    atwStats.round++;
+    if (atwStats.round == 21) {
+      showAtwStats(atwStats);
+    } else {
+      atwHitsBox.innerHTML = `Hits <br />${atwStats.dartHits} / ${atwStats.dartTotal}`;
+      atwScoreBox.innerHTML = `Score <br />${atwStats.currentScore}`;
+      atwPercentBox.innerHTML = `Percentage <br />${atwStats.percentage.toFixed(
+        2
+      )}%`;
+      atwTargetBox.innerHTML =
+        atwTargets[atwOrder[atwStats.round] - 1].description;
+    }
+    if (atwTargets[atwOrder[atwStats.round] - 1].description == "Throw Bull") {
+      atwTripleBtn.disabled = true;
+    } else {
+      atwTripleBtn.disabled = false;
     }
   });
 }
@@ -479,19 +533,48 @@ function bobsHandle() {
     currentScore: 27,
     difficulty: document.getElementById("bobsDifficulty").value,
   };
-  // let target = 1;
-  // let round = 0;
-  // let dartTotal = 0;
-  // let dartHits = 0;
-  // let percentage = 0;
-  // let currentScore = 27;
-  // let difficulty = document.getElementById("bobsDifficulty").value;
-  bobsHits.innerHTML = `Hits <br />${bobStats.dartHits} / ${bobStats.dartTotal}`;
-  bobsScore.innerHTML = `Score <br />${bobStats.currentScore}`;
-  bobsPercent.innerHTML = `Percentage <br />${bobStats.percentage.toFixed(2)}%`;
-  bobsTarget.innerHTML = doubleTargets[bobStats.round].description;
-  // bobsTarget.innerHTML = `Double ${target}`;
+  bobsHitsBox.innerHTML = `Hits <br />${bobStats.dartHits} / ${bobStats.dartTotal}`;
+  bobsScoreBox.innerHTML = `Score <br />${bobStats.currentScore}`;
+  bobsPercentBox.innerHTML = `Percentage <br />${bobStats.percentage.toFixed(
+    2
+  )}%`;
+  bobsTargetBox.innerHTML = bobsTargets[bobStats.round].description;
   bobsInput(bobStats);
+}
+
+function atwHandle() {
+  let atwStats = {
+    round: 0,
+    dartTotal: 0,
+    dartHits: 0,
+    percentage: 0,
+    currentScore: 0,
+    mode: document.getElementById("atwMode").value,
+  };
+  let atwOrder = Array.from({ length: 21 }, (_, i) => i + 1);
+  if (atwStats.mode == "Random") {
+    for (let i = atwOrder.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [atwOrder[i], atwOrder[j]] = [atwOrder[j], atwOrder[i]];
+    }
+  } else if (atwStats.mode == "Descending") {
+    atwOrder = Array.from({ length: 21 }, (_, i) => 21 - i);
+  } else if (atwStats.mode == "Clockwise") {
+    atwOrder = [
+      1, 18, 4, 13, 6, 10, 15, 2, 17, 3, 19, 7, 16, 8, 11, 14, 9, 12, 5, 20, 21,
+    ];
+  }
+
+  atwHitsBox.innerHTML = `Hits <br />${atwStats.dartHits} / ${atwStats.dartTotal}`;
+  atwScoreBox.innerHTML = `Score <br />${atwStats.currentScore}`;
+  atwPercentBox.innerHTML = `Percentage <br />${atwStats.percentage.toFixed(
+    2
+  )}%`;
+  atwTargetBox.innerHTML = atwTargets[atwOrder[atwStats.round] - 1].description;
+  if (atwTargets[atwOrder[atwStats.round] - 1].description == "Throw Bull") {
+    atwTripleBtn.disabled = true;
+  }
+  atwInput(atwStats, atwOrder);
 }
 
 matchBtn.addEventListener("click", function () {
@@ -501,11 +584,6 @@ matchBtn.addEventListener("click", function () {
 
 matchStartBtn.addEventListener("click", function () {
   matchHandle();
-});
-
-matchReturnBtn.addEventListener("click", function () {
-  classToggle(matchStartSection, "grid");
-  classToggle(mainMenuSection, "flex");
 });
 
 matchStatsReturnBtn.addEventListener("click", function () {
@@ -519,13 +597,9 @@ atwBtn.addEventListener("click", function () {
 });
 
 atwStartBtn.addEventListener("click", function () {
-  classToggle(atwStartSection, "flex");
+  classToggle(atwStartSection, "grid");
   classToggle(mainMenuSection, "flex");
-});
-
-atwReturnBtn.addEventListener("click", function () {
-  classToggle(atwStartSection, "flex");
-  classToggle(mainMenuSection, "flex");
+  atwHandle();
 });
 
 bobsBtn.addEventListener("click", function () {

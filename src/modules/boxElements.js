@@ -20,7 +20,12 @@ export const playerTwoCheckoutBox = document.getElementById(
 );
 export const playerOneAverageBox = document.getElementById("playerOneAvgBox");
 export const playerTwoAverageBox = document.getElementById("playerTwoAvgBox");
-export const bobsPercent = document.getElementById("bobsPercent");
-export const bobsScore = document.getElementById("bobsScore");
-export const bobsHits = document.getElementById("bobsHits");
-export const bobsTarget = document.getElementById("bobsTarget");
+export const bobsPercentBox = document.getElementById("bobsPercentBox");
+export const bobsScoreBox = document.getElementById("bobsScoreBox");
+export const bobsHitsBox = document.getElementById("bobsHitsBox");
+export const bobsTargetBox = document.getElementById("bobsTargetBox");
+export const atwButtonBox = document.getElementById("atwButtonBox");
+export const atwTargetBox = document.getElementById("atwTargetBox");
+export const atwHitsBox = document.getElementById("atwHitsBox");
+export const atwScoreBox = document.getElementById("atwScoreBox");
+export const atwPercentBox = document.getElementById("atwPercentBox");
