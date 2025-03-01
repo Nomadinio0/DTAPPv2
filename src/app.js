@@ -37,7 +37,6 @@ import {
   bobsStartBtn,
   matchBtn,
   matchStartBtn,
-  matchStatsReturnBtn,
 } from "/src/modules/buttons.js";
 import checkouts from "/src/modules/checkouts.js";
 import {
@@ -462,15 +461,9 @@ function matchInput(
         ? "playerOneAvgBox"
         : "playerTwoAvgBox";
 
-      document.getElementById(
-        currentRemainBox
-      ).innerHTML = `${currentPlayerRemainScore}`;
-      document.getElementById(
-        currentScoreBox
-      ).innerHTML = `Last score <br />${score}`;
-      document.getElementById(
-        dartCountBox
-      ).innerHTML = `Darts <br />${currentPlayerDartsCount}`;
+      document.getElementById(currentRemainBox).innerHTML = `${currentPlayerRemainScore}`;
+      document.getElementById(currentScoreBox).innerHTML = `Last score <br />${score}`;
+      document.getElementById(dartCountBox).innerHTML = `Darts <br />${currentPlayerDartsCount}`;
       if (onFinish(currentPlayerRemainScore)) {
         document.getElementById(currentCheckoutBox).innerHTML = onFinish(
           currentPlayerRemainScore
@@ -500,6 +493,9 @@ function matchHandle() {
   let matchSettings = loadMatchSettings();
   if (matchSettings.p1Name === "" || matchSettings.p2Name === "") {
     alert("Popraw dane. Gracze muszą mieć nazwy!");
+    return;
+  } else if (matchSettings.setDistance < 1 || matchSettings.legDistance < 1) {
+    alert("Popraw dane. Zła wartość setów/legów!");
     return;
   } else {
     classToggle(matchStartSection, "grid");
@@ -582,11 +578,6 @@ matchBtn.addEventListener("click", function () {
 
 matchStartBtn.addEventListener("click", function () {
   matchHandle();
-});
-
-matchStatsReturnBtn.addEventListener("click", function () {
-  classToggle(matchStatsSection, "flex");
-  classToggle(mainMenuSection, "flex");
 });
 
 atwBtn.addEventListener("click", function () {

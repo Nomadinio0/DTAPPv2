@@ -12,6 +12,3 @@ export const bobsSingleBtn = document.getElementById("bobsSingleBtn");
 export const bobsDoubleBtn = document.getElementById("bobsDoubleBtn");
 export const bobsTripleBtn = document.getElementById("bobsTripleBtn");
 export const bobsNoscoreBtn = document.getElementById("bobsNoscoreBtn");
-export const matchStatsReturnBtn = document.getElementById(
-  "matchStatsReturnBtn"
-);
