@@ -1,4 +1,3 @@
-import { atwTargets, bobsTargets } from "./modules/targets.js";
 import {
   atwButtonBox,
   atwHitsBox,
@@ -28,7 +27,7 @@ import {
   playerTwoRemainBox,
   playerTwoScoreBox,
   playerTwoSetsBox,
-} from "/src/modules/boxElements.js";
+} from "./_boxElements.js";
 import {
   atwBtn,
   atwStartBtn,
@@ -37,8 +36,8 @@ import {
   bobsStartBtn,
   matchBtn,
   matchStartBtn,
-} from "/src/modules/buttons.js";
-import checkouts from "/src/modules/checkouts.js";
+} from "./_buttons.js";
+import checkouts from "./_checkouts.js";
 import {
   atwSection,
   atwStartSection,
@@ -50,7 +49,8 @@ import {
   matchSection,
   matchStartSection,
   matchStatsSection,
-} from "/src/modules/sections.js";
+} from "./_sections.js";
+import { atwTargets, bobsTargets } from "./_targets.js";
 
 function hideSection() {
   let visibleSection = document.querySelector(".gameSection.flex");
@@ -461,9 +461,15 @@ function matchInput(
         ? "playerOneAvgBox"
         : "playerTwoAvgBox";
 
-      document.getElementById(currentRemainBox).innerHTML = `${currentPlayerRemainScore}`;
-      document.getElementById(currentScoreBox).innerHTML = `Last score <br />${score}`;
-      document.getElementById(dartCountBox).innerHTML = `Darts <br />${currentPlayerDartsCount}`;
+      document.getElementById(
+        currentRemainBox
+      ).innerHTML = `${currentPlayerRemainScore}`;
+      document.getElementById(
+        currentScoreBox
+      ).innerHTML = `Last score <br />${score}`;
+      document.getElementById(
+        dartCountBox
+      ).innerHTML = `Darts <br />${currentPlayerDartsCount}`;
       if (onFinish(currentPlayerRemainScore)) {
         document.getElementById(currentCheckoutBox).innerHTML = onFinish(
           currentPlayerRemainScore
