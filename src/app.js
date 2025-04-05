@@ -329,11 +329,11 @@ function matchInput(
 
   function highlightPlayer() {
     if (playerOneTurn) {
-      playerOneBox.classList.add("bg-[#befcc3]");
-      playerTwoBox.classList.remove("bg-[#befcc3]");
+      playerOneBox.classList.replace("bg-slate-300", "bg-white");
+      playerTwoBox.classList.replace("bg-white", "bg-slate-300");
     } else {
-      playerTwoBox.classList.add("bg-[#befcc3]");
-      playerOneBox.classList.remove("bg-[#befcc3]");
+      playerTwoBox.classList.replace("bg-slate-300", "bg-white");
+      playerOneBox.classList.replace("bg-white", "bg-slate-300");
     }
   }
 
@@ -520,6 +520,7 @@ function matchHandle() {
     playerTwoLegsBox.innerHTML = `Legs: ${playerTwo.legScore}`;
     playerOneSetsBox.innerHTML = `Sets: ${playerOne.setsWon}`;
     playerTwoSetsBox.innerHTML = `Sets: ${playerTwo.setsWon}`;
+    playerOneBox.classList.replace("bg-slate-300", "bg-white");
     matchInput(playerOne, playerTwo, matchSettings, currentLeg, currentSet);
   }
 }
